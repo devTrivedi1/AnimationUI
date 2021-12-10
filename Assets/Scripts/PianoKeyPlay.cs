@@ -19,7 +19,6 @@ public class PianoKeyPlay : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-
 			AudioPlay();
 		}
 	}

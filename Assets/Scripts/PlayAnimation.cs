@@ -11,25 +11,36 @@ public class PlayAnimation : MonoBehaviour
 	{
 		Camera camera = Camera.main;
 		animation = GetComponent<Animator>();
-		animation.SetBool("HighlightAnimation", true);
+		animation.SetBool("HighlightAnimation", false);
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-        if(Input.GetMouseButtonDown(0))
-        {
-            animation.SetBool("Clicked", true);
-        }
-        else
-        {
-            animation.SetBool("Clicked", false);
-        }
+		AnimationHighlight();
+		if (Input.GetMouseButtonDown(0))
+		{
+			animation.SetBool("Clicked", true);
+
+		}
+		else
+		{
+			animation.SetBool("Clicked", false);
+		}
 	}
 
 	void AnimationHighlight()
 	{
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if (Physics.Raycast(ray, out hit))
+		{
+			animation.SetBool("HighlightAnimation", true);
+		}
+		else
+		{
+			animation.SetBool("HighlightAnimation", false);
+		}
 
-	
 	}
 }
