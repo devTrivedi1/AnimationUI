@@ -9,7 +9,7 @@ public class PlayAnimation : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		Camera camera = Camera.main;
+		camera = Camera.main;
 		animation = GetComponent<Animator>();
 		animation.SetBool("HighlightAnimation", false);
 	}
@@ -20,27 +20,24 @@ public class PlayAnimation : MonoBehaviour
 		AnimationHighlight();
 		if (Input.GetMouseButtonDown(0))
 		{
-			animation.SetBool("Clicked", true);
-
-		}
-		else
-		{
-			animation.SetBool("Clicked", false);
+			animation.SetTrigger("Clicked");
 		}
 	}
-
-	void AnimationHighlight()
-	{
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit hit;
-		if (Physics.Raycast(ray, out hit))
+	
+	 	void AnimationHighlight()
 		{
-			animation.SetBool("HighlightAnimation", true);
-		}
-		else
-		{
-			animation.SetBool("HighlightAnimation", false);
-		}
+			Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
 
-	}
+			if (Physics.Raycast(ray, out hit))
+			{
+				animation.SetBool("HighlightAnimation", true);
+			}
+			else
+			{
+				animation.SetBool("HighlightAnimation", false);
+			}
+			Debug.DrawRay(ray.origin, ray.direction * 10f);
+
+		} 
 }
